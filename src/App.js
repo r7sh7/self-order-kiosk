@@ -1,4 +1,6 @@
 import { Container, createTheme, CssBaseline, Paper, ThemeProvider } from '@material-ui/core';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import ChooseOrderType from './screens/ChooseOrderType';
 import Home from './screens/Home';
 
 const theme = createTheme({
@@ -30,12 +32,19 @@ const theme = createTheme({
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Container maxWidth="sm">
-          <Home></Home>
-      </Container>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Container maxWidth="sm">
+          <Paper>
+            <Switch>
+              <Route path='/' component={Home} exact={true} />
+              <Route path='/choose' component={ChooseOrderType} />
+            </Switch>
+          </Paper>
+        </Container>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 
