@@ -1,0 +1,1 @@
+export const SET_ORDER_TYPE = 'SET_ORDER_TYPE';
