@@ -13,6 +13,9 @@ export const useStyles = makeStyles({
     green:{
         backgroundColor: '#00b020'
     },
+    navy:{
+        backgroundColor: '#003080'
+    },
     main:{
         display: 'flex',
         flexDirection: 'column',
@@ -27,5 +30,19 @@ export const useStyles = makeStyles({
     },
     largeLogo: {
         height: 100
+    }, 
+    cards: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    card: {
+        padding: 10,
+    },
+    space: {
+        margin: 10,
+    },
+    media:{
+        width: 200
     }
 });
