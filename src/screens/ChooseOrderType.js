@@ -1,9 +1,22 @@
 import { Box, Card, CardActionArea, CardContent, CardMedia, Fade, Typography } from "@material-ui/core";
+import { useContext } from "react";
+import { setOrderType } from "../actions";
 import Logo from "../components/Logo";
+import { Store } from "../store";
 import { useStyles } from "../styles";
 
-const ChooseOrderType = () => {
+
+
+
+const ChooseOrderType = (props) => {
     const styles = useStyles();
+
+    const {dispatch} = useContext(Store);
+    const chooseHandler = (orderType) => {
+        setOrderType(dispatch, orderType);
+        props.history.push('/order');
+    }
+
     return (  
         <Fade in={true}>
             <Box className={[styles.root, styles.navy]}>
@@ -14,7 +27,7 @@ const ChooseOrderType = () => {
                     </Typography>
                     <Box className={styles.cards}>
                         <Card className={[styles.card, styles.space]}>
-                            <CardActionArea>
+                            <CardActionArea onClick={() => chooseHandler('eat in')}>
                                 <CardMedia 
                                     component='img'
                                     alt='Eat In'
@@ -34,7 +47,7 @@ const ChooseOrderType = () => {
                             </CardActionArea>
                         </Card>
                         <Card className={[styles.card, styles.space]}>
-                            <CardActionArea>
+                            <CardActionArea onClick={() => chooseHandler('take out')}>
                                 <CardMedia 
                                     component='img'
                                     alt='Take Out'
