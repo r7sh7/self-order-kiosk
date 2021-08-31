@@ -19,14 +19,14 @@ const ChooseOrderType = (props) => {
 
     return (  
         <Fade in={true}>
-            <Box className={[styles.root, styles.navy]}>
-                <Box className={[styles.main, styles.center]}>
+            <Box className={`${styles.root} ${styles.navy}`}>
+                <Box className={`${styles.main} ${styles.center}`}>
                     <Logo large />
                     <Typography variant="h3" component="h3" gutterBottom>
                         Where will you be eating today?
                     </Typography>
                     <Box className={styles.cards}>
-                        <Card className={[styles.card, styles.space]}>
+                        <Card className={`${styles.card} ${styles.space}`}>
                             <CardActionArea onClick={() => chooseHandler('eat in')}>
                                 <CardMedia 
                                     component='img'
@@ -46,7 +46,7 @@ const ChooseOrderType = (props) => {
                                 </CardContent>
                             </CardActionArea>
                         </Card>
-                        <Card className={[styles.card, styles.space]}>
+                        <Card className={`${styles.card} ${styles.space}`}>
                             <CardActionArea onClick={() => chooseHandler('take out')}>
                                 <CardMedia 
                                     component='img'
