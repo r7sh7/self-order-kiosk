@@ -19,7 +19,7 @@ const Home = (props) => {
                         <TouchAppIcon fontSize="large"></TouchAppIcon>
                     </Box>
                     <Box className={[styles.center, styles.green]}>
-                        <Logo large></Logo>
+                        <Logo className={styles.largeLogo}></Logo>
                         <Typography component="h5" variant="h5">
                             Touch to start
                         </Typography>
