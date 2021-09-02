@@ -31,6 +31,9 @@ export const useStyles = makeStyles({
     largeLogo: {
         height: 100
     }, 
+    logo:{
+        height: 50
+    },
     cards: {
         display: 'flex',
         justifyContent: 'center',
