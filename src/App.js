@@ -2,6 +2,7 @@ import { Container, createTheme, CssBaseline, Paper, ThemeProvider } from '@mate
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ChooseOrderType from './screens/ChooseOrderType';
 import Home from './screens/Home';
+import { OrderScreen } from './screens/OrderScreen';
 
 const theme = createTheme({
   typography: {
@@ -39,7 +40,8 @@ function App() {
           <Paper>
             <Switch>
               <Route path='/' component={Home} exact={true} />
-              <Route path='/choose' component={ChooseOrderType} />
+              <Route path='/choose' component={ChooseOrderType} exact={true}/>
+              <Route path='/order' component={OrderScreen} exact={true}/>
             </Switch>
           </Paper>
         </Container>
