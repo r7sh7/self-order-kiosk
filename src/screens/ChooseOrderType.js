@@ -9,9 +9,11 @@ import { useStyles } from "../styles";
 
 
 const ChooseOrderType = (props) => {
+    
     const styles = useStyles();
 
     const {dispatch} = useContext(Store);
+
     const chooseHandler = (orderType) => {
         setOrderType(dispatch, orderType);
         props.history.push('/order');
@@ -21,7 +23,7 @@ const ChooseOrderType = (props) => {
         <Fade in={true}>
             <Box className={`${styles.root} ${styles.navy}`}>
                 <Box className={`${styles.main} ${styles.center}`}>
-                    <Logo className={styles.largeLogo}/>
+                    <Logo size={styles.largeLogo}/>
                     <Typography variant="h3" component="h3" gutterBottom>
                         Where will you be eating today?
                     </Typography>

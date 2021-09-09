@@ -9,7 +9,7 @@ import { useStyles } from "../styles";
 export const OrderScreen = () => {
     
     const styles = useStyles();
-    const {state, dispatch} = useContext(Store);
+    const { state, dispatch } = useContext(Store);
     const { categories, loading, error } = state.categoryList;
     useEffect(() => {
         listCategories(dispatch);
@@ -21,7 +21,7 @@ export const OrderScreen = () => {
                     <Grid item md={2}>
                         <List>
                             <ListItem button>
-                                <Logo className={styles.logo}/>
+                                <Logo size={styles.logo}/>
                             </ListItem>
                             {
                                 loading ? (

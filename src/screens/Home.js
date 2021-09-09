@@ -7,7 +7,7 @@ const Home = (props) => {
     const styles = useStyles();
     return (  
         <Card>
-            <CardActionArea onClick={() => props.history.push('/choose')}>
+            <CardActionArea onClick={() => props.history.push('/choose-order-type')}>
                 <Box className={[styles.root, styles.red]}>
                     <Box className={[styles.main, styles.center]}>
                         <Typography component="h6" variant="h6">
@@ -19,7 +19,7 @@ const Home = (props) => {
                         <TouchAppIcon fontSize="large"></TouchAppIcon>
                     </Box>
                     <Box className={[styles.center, styles.green]}>
-                        <Logo className={styles.largeLogo}></Logo>
+                        <Logo size={styles.largeLogo}></Logo>
                         <Typography component="h5" variant="h5">
                             Touch to start
                         </Typography>

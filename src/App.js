@@ -40,7 +40,7 @@ function App() {
           <Paper>
             <Switch>
               <Route path='/' component={Home} exact={true} />
-              <Route path='/choose' component={ChooseOrderType} exact={true}/>
+              <Route path='/choose-order-type' component={ChooseOrderType} exact={true}/>
               <Route path='/order' component={OrderScreen} exact={true}/>
             </Switch>
           </Paper>
