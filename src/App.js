@@ -11,6 +11,7 @@ const theme = createTheme({
     },
     h2: {
       fontSize: '2rem',
+      fontWeight: 'bold',
       color: 'black'
     }, 
     h3: {

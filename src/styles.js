@@ -20,7 +20,8 @@ export const useStyles = makeStyles({
         display: 'flex',
         flexDirection: 'column',
         flex: 1,
-        color: '#ffffff'
+        color: '#ffffff',
+        overflow: 'auto'
     },
     center:{
         display: 'flex',
@@ -40,10 +41,13 @@ export const useStyles = makeStyles({
         alignItems: 'center'
     },
     card: {
-        padding: 10,
+        margin: 10,
+    },
+    title: {
+        marginTop: 18
     },
     space: {
-        margin: 10,
+        padding: 10,
     },
     media:{
         width: 200
