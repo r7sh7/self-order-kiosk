@@ -6,8 +6,8 @@ const initialState = {
     categoryList: { loading: true },
     productList: { loading: true },
     order: {
-        orderType: 'eat in',
-        orderItems: []
+        orderType: 'Eat in',
+        orderItems: [],
     },
 }
 
@@ -46,13 +46,13 @@ const reducer = (state, action) => {
         case ORDER_ADD_ITEM: {
             const item = action.payload;
             const existItem = state.order.orderItems.find(x => x.name === item.name);
-            const orderItems = existItem ? state.order.orderItems.map(x => x.name === item.name ? item : x) : [state.order.orderItems, item ];
+            const orderItems = existItem ? state.order.orderItems.map(x => x.name === item.name ? item : x) : [...state.order.orderItems, item ];
 
-            const itemsCount = orderItems.reduce((a, c) => a + c.quantity);
-            const itemsPrice = orderItems.reduce((a, c) => a + c.quantity*c.price);
+            const itemsCount = orderItems.reduce((a, c) => a + c.quantity, 0);
+            const itemsPrice = orderItems.reduce((a, c) => a + c.quantity * c.price, 0);
 
-            const tax = Math.round(0.15*itemsPrice);
-            const total = Math.round(tax+itemsPrice);
+            const tax = Math.round(0.15 * itemsPrice);
+            const total = Math.round(tax + itemsPrice);
 
             return{
                 ...state, order: {...state.order, orderItems, itemsCount, tax, total }
@@ -60,13 +60,13 @@ const reducer = (state, action) => {
         }
         case ORDER_REMOVE_ITEM: {
             const item = action.payload
-            const orderItems = state.order.orderItems.filter(x => x.name !== item.payload);
+            const orderItems = state.order.orderItems.filter(x => x.name !== item.name);
 
-            const itemsCount = orderItems.reduce((a, c) => a + c.quantity);
-            const itemsPrice = orderItems.reduce((a, c) => a + c.quantity*c.price);
+            const itemsCount = orderItems.reduce((a, c) => a + c.quantity, 0);
+            const itemsPrice = orderItems.reduce((a, c) => a + c.quantity * c.price, 0);
 
-            const tax = Math.round(0.15*itemsPrice);
-            const total = Math.round(tax+itemsPrice);
+            const tax = Math.round(0.15 * itemsPrice);
+            const total = Math.round(tax + itemsPrice);
 
             return{
                 ...state, order: {...state.order, orderItems, itemsCount, tax, total}    
