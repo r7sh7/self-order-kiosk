@@ -74,7 +74,7 @@ const reducer = (state, action) => {
         }   
         case ORDER_CLEAR: 
             return{
-                ...state, order: { ...state.order, orderItems:[] }
+                ...state, order: { ...state.order, orderItems: [], tax: 0, total: 0, itemsCount: 0 },
             };
 
         default: 
