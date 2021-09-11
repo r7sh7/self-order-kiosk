@@ -1,9 +1,9 @@
-import { Avatar, Box, Button, Card, CardActionArea, CardContent, CardMedia, CircularProgress, Dialog, DialogTitle, Grid, List, ListItem, TextField, Typography } from "@material-ui/core"
+import { Avatar, Box, Button, Card, CardActionArea, CardContent, CardMedia, CircularProgress, Grid, List, ListItem, Typography } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
-import RemoveIcon from '@material-ui/icons/Remove';
-import AddIcon from '@material-ui/icons/Add';
+
 import { useContext, useEffect, useState } from "react";
-import { addToOrder, clearOrder, listCategories, listProducts, removeFromOrder } from "../actions";
+import { clearOrder, listCategories, listProducts } from "../actions";
+import { DialogPopup } from "../components/DialogPopup";
 import Logo from "../components/Logo";
 import { Store } from "../store";
 import { useStyles } from "../styles";
@@ -14,8 +14,8 @@ export const OrderScreen = (props) => {
     const styles = useStyles();
     const[ categoryName, setCategoryName ] = useState('');
     const [ product, setProduct ] = useState({});
-    const [ quantity, setQuantity ] = useState(1);
     const [ isOpen, setIsOpen ] = useState(false);
+    
 
     
     const categoryClickHandler = (name) => {
@@ -29,17 +29,7 @@ export const OrderScreen = (props) => {
         setIsOpen(true);
     };
 
-    const closeHandler = () => setIsOpen(false);
-
-    const removeOrCancelOrder = () => {
-        removeFromOrder(dispatch, product);
-        setIsOpen(false);
-    };
-
-    const addToOrderHandler = () => {
-        addToOrder(dispatch, {...product, quantity});
-        setIsOpen(false);
-    };
+    
 
     const previewOrderHandler = () => {
         
@@ -62,62 +52,13 @@ export const OrderScreen = (props) => {
 
     return(
         <Box className={styles.root}>
-            <Dialog maxWidth="sm" fullWidth={true} open={isOpen} onClose={closeHandler}>
-                <DialogTitle className={styles.center}>
-                    Add {product.name}
-                </DialogTitle>
-                <Box className={[styles.row, styles.center]}>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        disabled={ quantity === 1 }
-                        onClick={(e) => quantity > 1 && setQuantity(quantity-1)}
-                    >
-                        <RemoveIcon />
-                    </Button>
-                    <TextField 
-                        inputProps={{className: styles.largeInput}}
-                        InputProps={{
-                            bar:"true",
-                            inputProps: {
-                                className: styles.largeInput
-                            }
-                        }}
-                        className={styles.largeNumber}
-                        type="number"
-                        variant="filled"
-                        min={1}
-                        value={quantity}
-                    />
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={(e) => setQuantity(quantity + 1)}
-                    >
-                        <AddIcon />
-                    </Button>
-                </Box>
-                <Box className={[styles.row, styles.around]}>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        size="large"
-                        className={styles.largeButton}
-                        onClick={removeOrCancelOrder}
-                    >
-                        {orderItems.find((x) => x.name === product.name) ? 'Remove From Order' : 'Cancel' }
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        size="large"
-                        className={styles.largeButton}
-                        onClick={addToOrderHandler}
-                    >
-                        ADD To Order
-                    </Button>
-                </Box>
-            </Dialog>
+            <DialogPopup 
+                product={product}
+                orderItems={orderItems}
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+                dispatch={dispatch}
+            />
             <Box className={styles.main}>
                 <Grid container>
                     <Grid item md={2}>
