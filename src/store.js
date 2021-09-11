@@ -1,26 +1,19 @@
 import { createContext, useReducer } from "react";
-import { CATEGORY_LIST_FAILURE, CATEGORY_LIST_REQUEST, CATEGORY_LIST_SUCCESS, PRODUCT_LIST_FAILURE, PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, SET_ORDER_TYPE } from "./constants"
+import { CATEGORY_LIST_FAILURE, CATEGORY_LIST_REQUEST, CATEGORY_LIST_SUCCESS, PRODUCT_LIST_FAILURE, PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, ORDER_SET_TYPE, ORDER_ADD_ITEM, ORDER_REMOVE_ITEM, ORDER_CLEAR } from "./constants"
 
 //initial state
 const initialState = {
-    categoryList: {
-        loading: true
-    },
-    order:{
+    categoryList: { loading: true },
+    productList: { loading: true },
+    order: {
         orderType: 'eat in',
+        orderItems: []
     },
-    productList: {
-        loading: true
-    }
 }
 
 //reducer function
 const reducer = (state, action) => {
     switch(action.type){
-        case SET_ORDER_TYPE:
-            return {
-                ...state, order:{ ...state.order, orderType:action.payload }
-            };
         case CATEGORY_LIST_REQUEST:
             return {
                 ...state, categoryList:{ loading:true }
@@ -45,6 +38,45 @@ const reducer = (state, action) => {
                 return {
                     ...state, productList:{ loading:false,  error:action.payload }
                 };
+        case ORDER_SET_TYPE:
+                return {
+                    ...state, order:{ ...state.order, orderType:action.payload }
+                };
+
+        case ORDER_ADD_ITEM: {
+            const item = action.payload;
+            const existItem = state.order.orderItems.find(x => x.name === item.name);
+            const orderItems = existItem ? state.order.orderItems.map(x => x.name === item.name ? item : x) : [state.order.orderItems, item ];
+
+            const itemsCount = orderItems.reduce((a, c) => a + c.quantity);
+            const itemsPrice = orderItems.reduce((a, c) => a + c.quantity*c.price);
+
+            const tax = Math.round(0.15*itemsPrice);
+            const total = Math.round(tax+itemsPrice);
+
+            return{
+                ...state, order: {...state.order, orderItems, itemsCount, tax, total }
+            };
+        }
+        case ORDER_REMOVE_ITEM: {
+            const item = action.payload
+            const orderItems = state.order.orderItems.filter(x => x.name !== item.payload);
+
+            const itemsCount = orderItems.reduce((a, c) => a + c.quantity);
+            const itemsPrice = orderItems.reduce((a, c) => a + c.quantity*c.price);
+
+            const tax = Math.round(0.15*itemsPrice);
+            const total = Math.round(tax+itemsPrice);
+
+            return{
+                ...state, order: {...state.order, orderItems, itemsCount, tax, total}    
+            };
+        }   
+        case ORDER_CLEAR: 
+            return{
+                ...state, order: { ...state.order, orderItems:[] }
+            };
+
         default: 
             return state;
     }
