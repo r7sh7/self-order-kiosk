@@ -28,14 +28,15 @@ export const listProducts = async(dispatch, category) => {
     }
 };
 
-export const removeFromOrder = async(dispatch, item) => {
-    return dispatch({action: ORDER_REMOVE_ITEM, payload: item});
+export const addToOrder = async(dispatch, item) => {
+    return dispatch({type: ORDER_ADD_ITEM, payload: item})
 };
 
-export const addToOrder = async(dispatch, item) => {
-    return dispatch({action: ORDER_ADD_ITEM, payload: item})
+export const removeFromOrder = async(dispatch, item) => {
+    return dispatch({type: ORDER_REMOVE_ITEM, payload: item});
 };
+
 
 export const clearOrder = async(dispatch) => {
-    return dispatch({action: ORDER_CLEAR})
+    return dispatch({type: ORDER_CLEAR})
 }
