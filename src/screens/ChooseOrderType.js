@@ -29,7 +29,7 @@ const ChooseOrderType = (props) => {
                     </Typography>
                     <Box className={styles.cards}>
                         <Card className={`${styles.card} ${styles.space}`}>
-                            <CardActionArea onClick={() => chooseHandler('eat in')}>
+                            <CardActionArea onClick={() => chooseHandler('Eat In')}>
                                 <CardMedia 
                                     component='img'
                                     alt='Eat In'
@@ -49,7 +49,7 @@ const ChooseOrderType = (props) => {
                             </CardActionArea>
                         </Card>
                         <Card className={`${styles.card} ${styles.space}`}>
-                            <CardActionArea onClick={() => chooseHandler('take out')}>
+                            <CardActionArea onClick={() => chooseHandler('Take Away')}>
                                 <CardMedia 
                                     component='img'
                                     alt='Take Out'

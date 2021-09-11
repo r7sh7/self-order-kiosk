@@ -17,21 +17,6 @@ export const OrderScreen = (props) => {
     const [ quantity, setQuantity ] = useState(1);
     const [ isOpen, setIsOpen ] = useState(false);
 
-
-    const { state, dispatch } = useContext(Store);
-    const { categories, loading, error } = state.categoryList;
-    const { products, loading:loadingProducts, error:errorProducts } = state.productList;
-    const { orderType, orderItems, tax, total, itemsCount } = state.order;
-    
-
-    useEffect(() => {
-        if(!categories){
-            listCategories(dispatch);
-        }else{
-            listProducts(dispatch, categoryName);
-        }
-    }, [dispatch, categories, categoryName]);
-
     
     const categoryClickHandler = (name) => {
         setCategoryName(name);
@@ -58,7 +43,21 @@ export const OrderScreen = (props) => {
 
     const previewOrderHandler = () => {
         
-    }
+    };
+
+    const { state, dispatch } = useContext(Store);
+    const { categories, loading, error } = state.categoryList;
+    const { products, loading:loadingProducts, error:errorProducts } = state.productList;
+    const { orderType, orderItems, tax, total, itemsCount } = state.order;
+    
+
+    useEffect(() => {
+        if(!categories){
+            listCategories(dispatch);
+        }else{
+            listProducts(dispatch, categoryName);
+        }
+    }, [dispatch, categories, categoryName]);
 
 
     return(
@@ -72,14 +71,14 @@ export const OrderScreen = (props) => {
                         variant="contained"
                         color="primary"
                         disabled={ quantity === 1 }
-                        onClick={() => quantity > 1 && setQuantity(quantity-1)}
+                        onClick={(e) => quantity > 1 && setQuantity(quantity-1)}
                     >
                         <RemoveIcon />
                     </Button>
                     <TextField 
                         inputProps={{className: styles.largeInput}}
                         InputProps={{
-                            bar:true,
+                            bar:"true",
                             inputProps: {
                                 className: styles.largeInput
                             }
@@ -93,7 +92,7 @@ export const OrderScreen = (props) => {
                     <Button
                         variant="contained"
                         color="primary"
-                        onClick={() => setQuantity(quantity + 1)}
+                        onClick={(e) => setQuantity(quantity + 1)}
                     >
                         <AddIcon />
                     </Button>
@@ -151,9 +150,9 @@ export const OrderScreen = (props) => {
                         </Typography>
                         <Grid container spacing={1}>
                             {
-                                loadingProducts ? ( <CircularProgress />) : errorProducts ?
-                                 ( <Alert severity="error">{errorProducts}</Alert>) : ( 
-                                    products.map(product => ( <Grid item md={6} key={product.name}>
+                                loadingProducts ? ( <CircularProgress />) : (errorProducts ?
+                                 (<Alert severity="error">{errorProducts}</Alert>) : ( 
+                                    products.map((product) => (<Grid item md={6} key={product.name}>
                                         <Card className={styles.card} onClick={() => productClickHandler(product)}>
                                             <CardActionArea>
                                                 <CardMedia 
@@ -191,7 +190,7 @@ export const OrderScreen = (props) => {
                                             </CardContent>
                                         </Card>
                                     </Grid>))
-                                ) 
+                                ))
                             }
                         </Grid>
                     </Grid>
