@@ -1,5 +1,13 @@
 import axios from "axios";
-import { CATEGORY_LIST_FAILURE, CATEGORY_LIST_REQUEST, CATEGORY_LIST_SUCCESS, ORDER_ADD_ITEM, ORDER_CLEAR, ORDER_REMOVE_ITEM, ORDER_SET_TYPE, PRODUCT_LIST_FAILURE, PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, } from "./constants";
+import { CATEGORY_LIST_FAILURE, CATEGORY_LIST_REQUEST, CATEGORY_LIST_SUCCESS, ORDER_ADD_ITEM, ORDER_CLEAR, ORDER_REMOVE_ITEM, ORDER_SET_TYPE, PAYMENT_SET_TYPE, PRODUCT_LIST_FAILURE, PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, } from "./constants";
+
+export const setPaymentType = (dispatch, paymentType) => {
+    return dispatch({
+        type: PAYMENT_SET_TYPE,
+        payload: paymentType
+    })
+};
+
 
 export const setOrderType = (dispatch, orderType) => {
        return dispatch({
@@ -40,3 +48,4 @@ export const removeFromOrder = (dispatch, item) => {
 export const clearOrder = (dispatch) => {
     return dispatch({type: ORDER_CLEAR})
 };
+

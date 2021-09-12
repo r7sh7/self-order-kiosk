@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-import { CATEGORY_LIST_FAILURE, CATEGORY_LIST_REQUEST, CATEGORY_LIST_SUCCESS, PRODUCT_LIST_FAILURE, PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, ORDER_SET_TYPE, ORDER_ADD_ITEM, ORDER_REMOVE_ITEM, ORDER_CLEAR } from "./constants"
+import { CATEGORY_LIST_FAILURE, CATEGORY_LIST_REQUEST, CATEGORY_LIST_SUCCESS, PRODUCT_LIST_FAILURE, PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, ORDER_SET_TYPE, ORDER_ADD_ITEM, ORDER_REMOVE_ITEM, ORDER_CLEAR, PAYMENT_SET_TYPE } from "./constants"
 
 //initial state
 const initialState = {
@@ -8,6 +8,7 @@ const initialState = {
     order: {
         orderType: 'Eat in',
         orderItems: [],
+        paymentType: 'Pay here'
     },
 }
 
@@ -77,6 +78,11 @@ const reducer = (state, action) => {
         case ORDER_CLEAR: 
             return{
                 ...state, order: { ...state.order, orderItems: [], tax: 0, total: 0, itemsCount: 0 },
+            };
+
+        case PAYMENT_SET_TYPE: 
+            return{
+                ...state, order:{ ...state.order, paymentType: action.payload } 
             };
 
         default: 
