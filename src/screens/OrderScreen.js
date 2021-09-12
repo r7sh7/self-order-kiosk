@@ -1,10 +1,11 @@
-import { Avatar, Box, Button, Card, CardActionArea, CardContent, CardMedia, CircularProgress, Grid, List, ListItem, Typography } from "@material-ui/core";
+import { Avatar, Box, Card, CardActionArea, CardContent, CardMedia, CircularProgress, Grid, List, ListItem, Typography } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 
 import { useContext, useEffect, useState } from "react";
 import { clearOrder, listCategories, listProducts } from "../actions";
 import { DialogPopup } from "../components/DialogPopup";
 import Logo from "../components/Logo";
+import OrderDetailsFooter from "../components/OrderDetailsFooter";
 import { Store } from "../store";
 import { useStyles } from "../styles";
 
@@ -29,7 +30,10 @@ export const OrderScreen = (props) => {
         setIsOpen(true);
     };
 
-    
+    const cancelOrderHandler = () => {
+        clearOrder(dispatch);
+        props.history.push('/')
+    }
 
     const previewOrderHandler = () => {
         props.history.push('/review');
@@ -38,7 +42,7 @@ export const OrderScreen = (props) => {
     const { state, dispatch } = useContext(Store);
     const { categories, loading, error } = state.categoryList;
     const { products, loading:loadingProducts, error:errorProducts } = state.productList;
-    const { orderType, orderItems, tax, total, itemsCount } = state.order;
+    const { orderItems } = state.order;
     
 
     useEffect(() => {
@@ -138,32 +142,12 @@ export const OrderScreen = (props) => {
                 </Grid>
             </Box>
             <Box>
-                <Box>
-                    <Box className={[styles.bordered, styles.space]}>
-                            My Order - {orderType} | Tax: ${tax} | Total: ${total} | Items: {itemsCount}
-                    </Box>
-                    <Box className={[styles.row, styles.around]}>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                className={styles.largeButton}
-                                onClick={() => {
-                                    clearOrder(dispatch);
-                                    props.history.push('/');
-                                }}
-                            >
-                                Cancel Order
-                            </Button>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                className={styles.largeButton}
-                                onClick={previewOrderHandler}
-                            >
-                                Done
-                            </Button>
-                    </Box>
-                </Box>
+                <OrderDetailsFooter 
+                    btnLeft="Cancel"
+                    btnLeftHandler={cancelOrderHandler}
+                    btnRight="Done"
+                    btnRightHandler={previewOrderHandler}
+                />
             </Box>
         </Box>
     );

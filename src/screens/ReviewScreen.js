@@ -2,10 +2,11 @@ import { Box, Button, Card, CardActionArea, CardContent, Grid, Typography } from
 import { useContext, useState } from "react";
 import { DialogPopup } from "../components/DialogPopup";
 import Logo from "../components/Logo";
+import OrderDetailsFooter from "../components/OrderDetailsFooter";
 import { Store } from "../store";
 import { useStyles } from "../styles";
 
-export const ReviewScreen = () => {
+export const ReviewScreen = (props) => {
     
     const styles = useStyles();
     const {state, dispatch} =  useContext(Store);
@@ -18,6 +19,10 @@ export const ReviewScreen = () => {
         setProduct(p);
         setIsOpen(true);
     };
+
+    const procedToCheckoutHandler = () => {
+        props.history.push('/select-payment');
+      };    
 
     return(
         <Box className={styles.root}>
@@ -83,6 +88,12 @@ export const ReviewScreen = () => {
                     ))}
                 </Grid>
             </Box>
+            <OrderDetailsFooter 
+                    btnLeft="Back"
+                    btnLeftHandler={() => props.history.push('/order')}
+                    btnRight="Proceed To Checkout"
+                    btnRightHandler={procedToCheckoutHandler}
+                />
         </Box>
     );
 }
