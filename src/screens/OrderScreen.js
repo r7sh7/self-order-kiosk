@@ -32,7 +32,7 @@ export const OrderScreen = (props) => {
     
 
     const previewOrderHandler = () => {
-        
+        props.history.push('/review');
     };
 
     const { state, dispatch } = useContext(Store);

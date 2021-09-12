@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ChooseOrderType from './screens/ChooseOrderType';
 import Home from './screens/Home';
 import { OrderScreen } from './screens/OrderScreen';
+import { ReviewScreen } from './screens/ReviewScreen';
 
 const theme = createTheme({
   typography: {
@@ -43,6 +44,7 @@ function App() {
               <Route path='/' component={Home} exact={true} />
               <Route path='/choose-order-type' component={ChooseOrderType} exact={true}/>
               <Route path='/order' component={OrderScreen} exact={true}/>
+              <Route path='/review' component={ReviewScreen} exact={true}/>
             </Switch>
           </Paper>
         </Container>
