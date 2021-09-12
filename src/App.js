@@ -4,6 +4,7 @@ import ChooseOrderType from './screens/ChooseOrderType';
 import Home from './screens/Home';
 import { OrderScreen } from './screens/OrderScreen';
 import { ReviewScreen } from './screens/ReviewScreen';
+import SelectPaymentScreen from './screens/SelectPaymentScreen';
 
 const theme = createTheme({
   typography: {
@@ -19,6 +20,9 @@ const theme = createTheme({
       fontSize: '1.8rem',
       fontWeight: 'bold',
       color: 'white',
+    },
+    h4: {
+      fontSize: '1.6rem'
     }
   },
   palette: {
@@ -45,6 +49,7 @@ function App() {
               <Route path='/choose-order-type' component={ChooseOrderType} exact={true}/>
               <Route path='/order' component={OrderScreen} exact={true}/>
               <Route path='/review' component={ReviewScreen} exact={true}/>
+              <Route path='/select-payment' component={SelectPaymentScreen} exact={true}/>
             </Switch>
           </Paper>
         </Container>
