@@ -26,6 +26,7 @@ const reducer = (state, action) => {
             return {
                 ...state, categoryList:{ loading:false,  error:action.payload }
             };
+            
         case PRODUCT_LIST_REQUEST:
                 return {
                     ...state, productList:{ loading:true }
@@ -38,11 +39,11 @@ const reducer = (state, action) => {
                 return {
                     ...state, productList:{ loading:false,  error:action.payload }
                 };
+
         case ORDER_SET_TYPE:
                 return {
                     ...state, order:{ ...state.order, orderType:action.payload }
                 };
-
         case ORDER_ADD_ITEM: {
             const item = action.payload;
             const existItem = state.order.orderItems.find(x => x.name === item.name);
