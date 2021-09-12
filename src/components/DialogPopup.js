@@ -50,7 +50,7 @@ export const DialogPopup = ({product, isOpen, setIsOpen, orderItems, dispatch}) 
                         type="number"
                         variant="filled"
                         min={1}
-                        value={product.quantity? product.quantity : quantity}
+                        value={quantity}
                     />
                     <Button
                         variant="contained"

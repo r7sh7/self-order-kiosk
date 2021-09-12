@@ -26,7 +26,7 @@ const reducer = (state, action) => {
             return {
                 ...state, categoryList:{ loading:false,  error:action.payload }
             };
-            
+
         case PRODUCT_LIST_REQUEST:
                 return {
                     ...state, productList:{ loading:true }
@@ -52,8 +52,8 @@ const reducer = (state, action) => {
             const itemsCount = orderItems.reduce((a, c) => a + c.quantity, 0);
             const itemsPrice = orderItems.reduce((a, c) => a + c.quantity * c.price, 0);
 
-            const tax = Math.round(0.15 * itemsPrice);
-            const total = Math.round(tax + itemsPrice);
+            const tax = Math.round(0.15 * itemsPrice * 100) / 100;
+            const total = Math.round((itemsPrice + tax) * 100) / 100;
 
             return{
                 ...state, order: {...state.order, orderItems, itemsCount, tax, total }
@@ -66,8 +66,9 @@ const reducer = (state, action) => {
             const itemsCount = orderItems.reduce((a, c) => a + c.quantity, 0);
             const itemsPrice = orderItems.reduce((a, c) => a + c.quantity * c.price, 0);
 
-            const tax = Math.round(0.15 * itemsPrice);
-            const total = Math.round(tax + itemsPrice);
+            const tax = Math.round(0.15 * itemsPrice * 100) / 100;
+            const total = Math.round((itemsPrice + tax) * 100) / 100;
+
 
             return{
                 ...state, order: {...state.order, orderItems, itemsCount, tax, total}    
