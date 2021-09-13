@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CATEGORY_LIST_FAILURE, CATEGORY_LIST_REQUEST, CATEGORY_LIST_SUCCESS, ORDER_ADD_ITEM, ORDER_CLEAR, ORDER_REMOVE_ITEM, ORDER_SET_TYPE, PAYMENT_SET_TYPE, PRODUCT_LIST_FAILURE, PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, } from "./constants";
+import { CATEGORY_LIST_FAILURE, CATEGORY_LIST_REQUEST, CATEGORY_LIST_SUCCESS, ORDER_ADD_ITEM, ORDER_CLEAR, ORDER_CREATE_FAILURE, ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS, ORDER_REMOVE_ITEM, ORDER_SET_TYPE, PAYMENT_SET_TYPE, PRODUCT_LIST_FAILURE, PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, } from "./constants";
 
 export const setPaymentType = (dispatch, paymentType) => {
     return dispatch({
@@ -37,7 +37,7 @@ export const listProducts = async(dispatch, category) => {
 };
 
 export const addToOrder = (dispatch, item) => {
-    return dispatch({type: ORDER_ADD_ITEM, payload: item})
+    return dispatch({type: ORDER_ADD_ITEM, payload: item});
 };
 
 export const removeFromOrder = (dispatch, item) => {
@@ -46,6 +46,16 @@ export const removeFromOrder = (dispatch, item) => {
 
 
 export const clearOrder = (dispatch) => {
-    return dispatch({type: ORDER_CLEAR})
+    return dispatch({ type: ORDER_CLEAR });
 };
 
+export const createOrder = (dispatch, order) => {
+    dispatch({ type: ORDER_CREATE_REQUEST });
+    try{
+        axios.post('/api/orders', order)
+            .then((data) => dispatch({ type: ORDER_CREATE_SUCCESS, payload: data })); 
+        dispatch({ type: ORDER_CLEAR });
+    }catch(error){
+        dispatch({ type: ORDER_CREATE_FAILURE, payload: error.message });
+    }
+}
