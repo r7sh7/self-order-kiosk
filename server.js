@@ -47,4 +47,19 @@ app.post('/api/products', (req, res) => {
     newProduct.save(product => res.send(product));
 });
 
-
+app.post('/api/orders', async (req, res) => {
+    const lastOrder = Order.find().sort({number: -1}).limit(1);
+    const lastNumber = lastOrder.length === 0 ? 0 : lastOrder[0].number;
+    
+    if(
+        !req.body.orderType || 
+        !req.body.paymentType || 
+        !req.body.orderItems || 
+        req.body.orderItems.length === 0
+    ){
+        res.send({ message: 'Data is required' });
+    }else{
+        const order = await Order({...req.body, number: lastNumber + 1}).save();
+        res.send(order);
+    }
+});
