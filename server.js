@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const data = require('./data');
 const Product = require('./src/models/product')
+const Order = require('./src/models/order');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -45,3 +46,5 @@ app.post('/api/products', (req, res) => {
     const newProduct = new Product(req.body);
     newProduct.save(product => res.send(product));
 });
+
+
