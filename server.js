@@ -14,15 +14,6 @@ app.get('/api/categories', (req,res) => {
     res.send(data.categories);
 });
 
-
-//making the build folder files static for FE
-app.use(express.static(path.join(__dirname, '/build')));
-
-//serving the build folder 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '/build/index.html'));
-});
-
 //configuring and connecting to mongoDB
 dotenv.config();
 mongoose.connect(process.env.MONGODB_URI, {
@@ -31,6 +22,14 @@ mongoose.connect(process.env.MONGODB_URI, {
 }).then(result => {
     app.listen(port, () => console.log(`serve at http://localhost:${port}`))
 }).catch(err => console.log(err));
+
+//making the build folder files static for FE
+app.use(express.static(path.join(__dirname, '/build')));
+
+//serving the build folder 
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '/build/index.html'));
+});
 
 
 //api to seed products data 
