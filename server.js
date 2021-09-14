@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const data = require('./data');
@@ -11,6 +12,15 @@ const port = process.env.PORT || 5000;
 //api to get category data for listing the different categories to choose from 
 app.get('/api/categories', (req,res) => {
     res.send(data.categories);
+});
+
+
+//making the build folder files static for FE
+app.use(express.static(path.join(__dirname, '/build')));
+
+//serving the build folder 
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '/build/index.html'));
 });
 
 //configuring and connecting to mongoDB
@@ -33,7 +43,7 @@ app.get('/api/products/seed', (req, res) => {
 //api to get product data from the DB at the specified endpoint 
 app.get('/api/products', (req, res) => {
     const { category }  = req.query;
-    Product.find(category? { category } : {})
+    Product.find(category ? { category } : {}) 
         .then(products => res.send(products));
 });
 
@@ -47,8 +57,9 @@ app.post('/api/products', (req, res) => {
     newProduct.save(product => res.send(product));
 });
 
+//api to create a new order.
 app.post('/api/orders', async (req, res) => {
-    const lastOrder = Order.find().sort({number: -1}).limit(1);
+    const lastOrder = await Order.find().sort({number: -1}).limit(1);
     const lastNumber = lastOrder.length === 0 ? 0 : lastOrder[0].number;
     
     if(
@@ -57,9 +68,9 @@ app.post('/api/orders', async (req, res) => {
         !req.body.orderItems || 
         req.body.orderItems.length === 0
     ){
-        res.send({ message: 'Data is required' });
-    }else{
-        const order = await Order({...req.body, number: lastNumber + 1}).save();
-        res.send(order);
-    }
+        return res.send({ message: 'Data is required' });
+    }   
+    
+    const newOrder = await new Order({ ...req.body, number: lastNumber + 1 }).save();
+    res.send(newOrder);   
 });
