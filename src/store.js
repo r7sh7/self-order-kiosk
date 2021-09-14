@@ -1,8 +1,9 @@
 import { createContext, useReducer } from "react";
-import { CATEGORY_LIST_FAILURE, CATEGORY_LIST_REQUEST, CATEGORY_LIST_SUCCESS, PRODUCT_LIST_FAILURE, PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, ORDER_SET_TYPE, ORDER_ADD_ITEM, ORDER_REMOVE_ITEM, ORDER_CLEAR, PAYMENT_SET_TYPE, ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS, ORDER_CREATE_FAILURE, ORDER_LIST_SUCCESS, ORDER_LIST_REQUEST, ORDER_LIST_FAILURE } from "./constants"
+import { CATEGORY_LIST_FAILURE, CATEGORY_LIST_REQUEST, CATEGORY_LIST_SUCCESS, PRODUCT_LIST_FAILURE, PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, ORDER_SET_TYPE, ORDER_ADD_ITEM, ORDER_REMOVE_ITEM, ORDER_CLEAR, PAYMENT_SET_TYPE, ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS, ORDER_CREATE_FAILURE, ORDER_LIST_SUCCESS, ORDER_LIST_REQUEST, ORDER_LIST_FAILURE, SCREEN_SET_WIDTH } from "./constants"
 
 //initial state
 const initialState = {
+    wideScreen: false,
     categoryList: { loading: true },
     productList: { loading: true },
     order: {
@@ -128,6 +129,12 @@ const reducer = (state, action) => {
             return{
                 ...state, 
                 orderList: { ...state, orderList: { loading: false, error: action.payload }}
+            };
+
+        case SCREEN_SET_WIDTH: 
+            return{
+                ...state,
+                wideScreen: true
             };
 
         default: 
