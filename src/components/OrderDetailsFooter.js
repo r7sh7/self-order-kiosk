@@ -28,6 +28,7 @@ const OrderDetailsFooter = ({btnLeft, btnLeftHandler, btnRight, btnRightHandler}
                                 color="primary"
                                 className={styles.largeButton}
                                 onClick={btnRightHandler}
+                                disabled={itemsCount === 0}
                             >
                                 {btnRight}
                             </Button>

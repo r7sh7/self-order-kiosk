@@ -11,7 +11,7 @@ const initialState = {
         paymentType: 'Pay here'
     },
     orderCreate: { loading: true }
-}
+};
 
 //reducer function
 const reducer = (state, action) => {
