@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-import { CATEGORY_LIST_FAILURE, CATEGORY_LIST_REQUEST, CATEGORY_LIST_SUCCESS, PRODUCT_LIST_FAILURE, PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, ORDER_SET_TYPE, ORDER_ADD_ITEM, ORDER_REMOVE_ITEM, ORDER_CLEAR, PAYMENT_SET_TYPE, ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS, ORDER_CREATE_FAILURE } from "./constants"
+import { CATEGORY_LIST_FAILURE, CATEGORY_LIST_REQUEST, CATEGORY_LIST_SUCCESS, PRODUCT_LIST_FAILURE, PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, ORDER_SET_TYPE, ORDER_ADD_ITEM, ORDER_REMOVE_ITEM, ORDER_CLEAR, PAYMENT_SET_TYPE, ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS, ORDER_CREATE_FAILURE, ORDER_LIST_SUCCESS, ORDER_LIST_REQUEST, ORDER_LIST_FAILURE } from "./constants"
 
 //initial state
 const initialState = {
@@ -10,7 +10,8 @@ const initialState = {
         orderItems: [],
         paymentType: 'Pay here'
     },
-    orderCreate: { loading: true }
+    orderCreate: { loading: true },
+    orderList: { loading: true },
 };
 
 //reducer function
@@ -111,6 +112,22 @@ const reducer = (state, action) => {
             return{
                 ...state, 
                 orderCreate: { loading: false, error: action.payload }
+            };
+        
+        
+        case ORDER_LIST_REQUEST: 
+            return{
+                ...state, orderList: { loading: true }
+            };
+        case ORDER_LIST_SUCCESS:
+            return{
+                ...state, 
+                orderList: { ...state, orderList: { loading: false, orders: action.payload }}
+            };
+        case ORDER_LIST_FAILURE:
+            return{
+                ...state, 
+                orderList: { ...state, orderList: { loading: false, error: action.payload }}
             };
 
         default: 
