@@ -73,3 +73,30 @@ app.post('/api/orders', async (req, res) => {
     const newOrder = await new Order({ ...req.body, number: lastNumber + 1 }).save();
     res.send(newOrder);   
 });
+
+//for admin screen
+app.get('/api/orders', (req, res) => {
+    Order.find({ isCancelled: false, isDelivered: false })
+        .then((orders) => res.send(orders));
+});
+
+//api for updating order status
+app.put('/api/order/:id', async (req, res) => {
+    const order = Order.findById(req.params.id);
+    if(order){
+        if(req.body.status === 'ready'){
+            order.isReady = true;
+            order.inProgress = false;
+        }else if(req.body.status === 'cancel') {
+            order.isCancelled = true;
+            order.inProgress = false;
+        }else if(req.body.status === 'delivered'){
+            order.isDelivered = true;
+            order.inProgress = false;
+        }
+        await order.save();
+        res.send({ message: 'done' });
+    }else{
+        req.status(404).message({ message: 'Order not found' });
+    }
+});
