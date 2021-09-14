@@ -49,13 +49,17 @@ export const clearOrder = (dispatch) => {
     return dispatch({ type: ORDER_CLEAR });
 };
 
-export const createOrder = (dispatch, order) => {
+export const createOrder = async (dispatch, order) => {
     dispatch({ type: ORDER_CREATE_REQUEST });
     try{
-        axios.post('/api/orders', order)
-            .then((data) => dispatch({ type: ORDER_CREATE_SUCCESS, payload: data })); 
+        // axios.post('/api/orders', order)
+        //     .then((data) => dispatch({ type: ORDER_CREATE_SUCCESS, payload: data })); 
+        // dispatch({ type: ORDER_CLEAR });
+        const { data } = await axios.post('/api/orders', order);
+        dispatch({ type: ORDER_CREATE_SUCCESS, payload: data });
         dispatch({ type: ORDER_CLEAR });
     }catch(error){
+        console.log(error);
         dispatch({ type: ORDER_CREATE_FAILURE, payload: error.message });
     }
 }

@@ -35,7 +35,7 @@ export const ReviewScreen = (props) => {
                     dispatch={dispatch}
                 />
             <Box className={[styles.center, styles.column]}>
-                <Logo size={styles.largeLogo}></Logo>
+                    <Logo size={styles.largeLogo}></Logo>
                     <Typography
                         gutterBottom
                         className={styles.title}
@@ -44,7 +44,7 @@ export const ReviewScreen = (props) => {
                     >
                         Review my {orderType} order
                     </Typography>
-                </Box>
+            </Box>
                 <Grid container>
                     {orderItems.map(orderItem => (
                         <Grid item md={12} key={orderItem.name}>

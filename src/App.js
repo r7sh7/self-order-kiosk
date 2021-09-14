@@ -1,8 +1,10 @@
 import { Container, createTheme, CssBaseline, Paper, ThemeProvider } from '@material-ui/core';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ChooseOrderType from './screens/ChooseOrderType';
+import CompletedOrderScreen from './screens/CompletedOrderScreen';
 import Home from './screens/Home';
 import { OrderScreen } from './screens/OrderScreen';
+import PaymentScreen from './screens/PaymentScreen';
 import { ReviewScreen } from './screens/ReviewScreen';
 import SelectPaymentScreen from './screens/SelectPaymentScreen';
 
@@ -50,6 +52,8 @@ function App() {
               <Route path='/order' component={OrderScreen} exact={true}/>
               <Route path='/review' component={ReviewScreen} exact={true}/>
               <Route path='/select-payment' component={SelectPaymentScreen} exact={true}/>
+              <Route path='/payment' component={PaymentScreen} exact={true}/>
+              <Route path='/complete' component={CompletedOrderScreen} exact={true}/>
             </Switch>
           </Paper>
         </Container>
