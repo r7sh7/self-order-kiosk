@@ -106,6 +106,5 @@ app.get('/api/orders/queue', async(req, res) => {
     const inProgressOrders = await Order.find({ inProgress: true, isCancelled: false }, 'number');
     const servingOrders = await Order.find({ isReady: true, isCancelled: false, isDelivered: false}, 'number');
     res.send({inProgressOrders, servingOrders});
-    res.redirect('/queue');
 });
 
