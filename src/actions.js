@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CATEGORY_LIST_FAILURE, CATEGORY_LIST_REQUEST, CATEGORY_LIST_SUCCESS, ORDER_ADD_ITEM, ORDER_CLEAR, ORDER_CREATE_FAILURE, ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS, ORDER_LIST_FAILURE, ORDER_LIST_REQUEST, ORDER_LIST_SUCCESS, ORDER_REMOVE_ITEM, ORDER_SET_TYPE, PAYMENT_SET_TYPE, PRODUCT_LIST_FAILURE, PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, SCREEN_SET_WIDTH, } from "./constants";
+import { CATEGORY_LIST_FAILURE, CATEGORY_LIST_REQUEST, CATEGORY_LIST_SUCCESS, ORDER_ADD_ITEM, ORDER_CLEAR, ORDER_CREATE_FAILURE, ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS, ORDER_LIST_FAILURE, ORDER_LIST_REQUEST, ORDER_LIST_SUCCESS, ORDER_QUEUE_FAILURE, ORDER_QUEUE_REQUEST, ORDER_QUEUE_SUCCESS, ORDER_REMOVE_ITEM, ORDER_SET_TYPE, PAYMENT_SET_TYPE, PRODUCT_LIST_FAILURE, PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, SCREEN_SET_WIDTH, } from "./constants";
 
 export const setPaymentType = (dispatch, paymentType) => {
     return dispatch({
@@ -74,3 +74,13 @@ export const listOrders = async (dispatch) => {
         return dispatch({ type: ORDER_LIST_FAILURE, payload: error.message });
     }
 };
+
+export const listQueue = async (dispatch) => {
+    dispatch({ type: ORDER_QUEUE_REQUEST});
+    try{
+        const { data } = await axios.get('/api/orders/queue');
+        dispatch({ type: ORDER_QUEUE_SUCCESS, payload: data });
+    }catch(err){
+        dispatch({ type: ORDER_QUEUE_FAILURE, payload: err.message });
+    }
+}

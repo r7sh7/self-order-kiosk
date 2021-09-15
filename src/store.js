@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-import { CATEGORY_LIST_FAILURE, CATEGORY_LIST_REQUEST, CATEGORY_LIST_SUCCESS, PRODUCT_LIST_FAILURE, PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, ORDER_SET_TYPE, ORDER_ADD_ITEM, ORDER_REMOVE_ITEM, ORDER_CLEAR, PAYMENT_SET_TYPE, ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS, ORDER_CREATE_FAILURE, ORDER_LIST_SUCCESS, ORDER_LIST_REQUEST, ORDER_LIST_FAILURE, SCREEN_SET_WIDTH } from "./constants"
+import { CATEGORY_LIST_FAILURE, CATEGORY_LIST_REQUEST, CATEGORY_LIST_SUCCESS, PRODUCT_LIST_FAILURE, PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, ORDER_SET_TYPE, ORDER_ADD_ITEM, ORDER_REMOVE_ITEM, ORDER_CLEAR, PAYMENT_SET_TYPE, ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS, ORDER_CREATE_FAILURE, ORDER_LIST_SUCCESS, ORDER_LIST_REQUEST, ORDER_LIST_FAILURE, SCREEN_SET_WIDTH, ORDER_QUEUE_REQUEST, ORDER_QUEUE_FAILURE, ORDER_QUEUE_SUCCESS } from "./constants"
 
 //initial state
 const initialState = {
@@ -13,6 +13,7 @@ const initialState = {
     },
     orderCreate: { loading: true },
     orderList: { loading: true },
+    queueList: { loading: true },
 };
 
 //reducer function
@@ -130,11 +131,26 @@ const reducer = (state, action) => {
                 ...state, 
                 orderList: { loading: false, error: action.payload }
             };
-
         case SCREEN_SET_WIDTH: 
             return{
                 ...state,
                 wideScreen: true
+            };
+
+        case ORDER_QUEUE_REQUEST:
+            return{
+                ...state,
+                queueList: { loading: true }
+            };
+        case ORDER_QUEUE_SUCCESS:
+            return{
+                ...state,
+                queueList: { loading: false, queue: action.payload }
+            };
+        case ORDER_QUEUE_FAILURE:
+            return{
+                ...state,
+                queueList: { loading: false, error: action.payload }
             };
 
         default: 
