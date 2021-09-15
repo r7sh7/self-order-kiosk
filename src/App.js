@@ -1,6 +1,6 @@
 import { Container, createTheme, CssBaseline, Paper, ThemeProvider } from '@material-ui/core';
 import { useContext } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Route, Switch } from 'react-router-dom';
 import AdminScreen from './screens/AdminScreen';
 import ChooseOrderType from './screens/ChooseOrderType';
 import CompletedOrderScreen from './screens/CompletedOrderScreen';
@@ -46,7 +46,7 @@ const theme = createTheme({
 function App() {
   const { state } = useContext(Store);
   return (
-    <BrowserRouter>
+    <HashRouter>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Container maxWidth={ state.wideScreen ? "lg" : "sm" }>
@@ -65,7 +65,7 @@ function App() {
           </Paper>
         </Container>
       </ThemeProvider>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
