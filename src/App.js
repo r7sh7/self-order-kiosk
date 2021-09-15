@@ -7,6 +7,7 @@ import CompletedOrderScreen from './screens/CompletedOrderScreen';
 import Home from './screens/Home';
 import { OrderScreen } from './screens/OrderScreen';
 import PaymentScreen from './screens/PaymentScreen';
+import QueueScreen from './screens/QueueScreen';
 import { ReviewScreen } from './screens/ReviewScreen';
 import SelectPaymentScreen from './screens/SelectPaymentScreen';
 import { Store } from './store';
@@ -59,6 +60,7 @@ function App() {
               <Route path='/payment' component={PaymentScreen} exact={true}/>
               <Route path='/complete' component={CompletedOrderScreen} exact={true}/>
               <Route path='/admin' component={AdminScreen} exact={true}/>
+              <Route path='/queue' component={QueueScreen} exact={true}/>
             </Switch>
           </Paper>
         </Container>
