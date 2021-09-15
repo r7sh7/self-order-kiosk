@@ -30,9 +30,9 @@ export const listProducts = async(dispatch, category) => {
     dispatch({type: PRODUCT_LIST_REQUEST});
     try{
         const { data } = await axios.get(`/api/products?category=${category}`);
-        dispatch({type: PRODUCT_LIST_SUCCESS, payload: data});
+        return dispatch({type: PRODUCT_LIST_SUCCESS, payload: data});
     }catch(error){
-        dispatch({type: PRODUCT_LIST_FAILURE, payload: error.message});
+        return dispatch({type: PRODUCT_LIST_FAILURE, payload: error.message});
     }
 };
 
@@ -69,8 +69,8 @@ export const listOrders = async (dispatch) => {
     dispatch({ type: ORDER_LIST_REQUEST });
     try{
         const { data } = await axios.get('/api/orders');
-        dispatch({ type: ORDER_LIST_SUCCESS, payload: data});
+        return dispatch({ type: ORDER_LIST_SUCCESS, payload: data});
     }catch(error){
-        dispatch({ type: ORDER_LIST_FAILURE, payload: error.message });
+        return dispatch({ type: ORDER_LIST_FAILURE, payload: error.message });
     }
 };

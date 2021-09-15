@@ -123,12 +123,12 @@ const reducer = (state, action) => {
         case ORDER_LIST_SUCCESS:
             return{
                 ...state, 
-                orderList: { ...state, orderList: { loading: false, orders: action.payload }}
+                orderList: { loading: false, orders: action.payload }
             };
         case ORDER_LIST_FAILURE:
             return{
                 ...state, 
-                orderList: { ...state, orderList: { loading: false, error: action.payload }}
+                orderList: { loading: false, error: action.payload }
             };
 
         case SCREEN_SET_WIDTH: 

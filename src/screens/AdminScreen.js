@@ -19,7 +19,7 @@ const AdminScreen = () => {
     const setOrderStateHandler = async (order, action) => {
         try{
             await axios.put('/api/orders/' + order._id, {
-                status: action
+                status: action,
             });
             listOrders(dispatch);
         }catch(error){
@@ -100,8 +100,7 @@ const AdminScreen = () => {
                         </TableBody>
                     </Table>
                 </TableContainer>    
-            )
-            }
+            )}
             </Box>
         </Box>
     );
