@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 //api to seed products data 
-router.get('/seed', productController.product_seed);
+// router.get('/seed', productController.product_seed);
 
 
 //api to get product data from the DB at the specified endpoint 
