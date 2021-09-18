@@ -6,7 +6,7 @@ import { useStyles } from "../styles";
 const OrderDetailsFooter = ({btnLeft, btnLeftHandler, btnRight, btnRightHandler}) => {
     const styles = useStyles();
     const { state } = useContext(Store);
-    const { orderType, tax, total, itemsCount } = state.order;
+    const { orderType, tax, total, itemsCount, orderItems } = state.order;
     return (  
         <Box>
                     <Box className={[styles.bordered, styles.space]}>
@@ -28,7 +28,7 @@ const OrderDetailsFooter = ({btnLeft, btnLeftHandler, btnRight, btnRightHandler}
                                 color="primary"
                                 className={styles.largeButton}
                                 onClick={btnRightHandler}
-                                disabled={itemsCount === 0}
+                                disabled={orderItems.length === 0}
                             >
                                 {btnRight}
                             </Button>
