@@ -9,8 +9,7 @@ router.get('/seed', productController.product_seed);
 
 
 //api to get product data from the DB at the specified endpoint 
-router.get('/', productController.product_create_post);
-
+router.get('/', productController.product_index);
 
 
 //api for admin to add a single product using POSTMAN 
