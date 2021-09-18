@@ -8,7 +8,7 @@ import { setPaymentType } from "../actions";
 const SelectPaymentScreen = (props) => {
 
     const styles = useStyles();
-    const {state, dispatch} = useContext(Store);
+    const {dispatch} = useContext(Store);
 
     const selectHandler = (paymentType) => {
         setPaymentType(dispatch, paymentType);
