@@ -1,13 +1,13 @@
 import { CircularProgress, Container, createTheme, CssBaseline, Paper, ThemeProvider } from '@material-ui/core';
 import { lazy, Suspense, useContext } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import OrderScreen from './screens/OrderScreen';
 import { Store } from './store';
 
 const AdminScreen = lazy(() => import('./screens/AdminScreen'));
 const ChooseOrderType = lazy(() => import('./screens/ChooseOrderType'));
 const CompletedOrderScreen = lazy(() => import('./screens/CompletedOrderScreen'));
 const Home = lazy(() => import('./screens/Home'));
-const OrderScreen = lazy(() => import('./screens/OrderScreen'));
 const PaymentScreen = lazy(() => import('./screens/PaymentScreen'));
 const QueueScreen = lazy(() => import('./screens/QueueScreen'));
 const ReviewScreen = lazy(() => import('./screens/ReviewScreen'));
