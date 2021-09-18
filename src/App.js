@@ -1,16 +1,19 @@
-import { Container, createTheme, CssBaseline, Paper, ThemeProvider } from '@material-ui/core';
-import { useContext } from 'react';
+import { CircularProgress, Container, createTheme, CssBaseline, Paper, ThemeProvider } from '@material-ui/core';
+import { lazy, Suspense, useContext } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import AdminScreen from './screens/AdminScreen';
-import ChooseOrderType from './screens/ChooseOrderType';
-import CompletedOrderScreen from './screens/CompletedOrderScreen';
-import Home from './screens/Home';
-import { OrderScreen } from './screens/OrderScreen';
-import PaymentScreen from './screens/PaymentScreen';
-import QueueScreen from './screens/QueueScreen';
-import { ReviewScreen } from './screens/ReviewScreen';
-import SelectPaymentScreen from './screens/SelectPaymentScreen';
 import { Store } from './store';
+
+const AdminScreen = lazy(() => import('./screens/AdminScreen'));
+const ChooseOrderType = lazy(() => import('./screens/ChooseOrderType'));
+const CompletedOrderScreen = lazy(() => import('./screens/CompletedOrderScreen'));
+const Home = lazy(() => import('./screens/Home'));
+const OrderScreen = lazy(() => import('./screens/OrderScreen'));
+const PaymentScreen = lazy(() => import('./screens/PaymentScreen'));
+const QueueScreen = lazy(() => import('./screens/QueueScreen'));
+const ReviewScreen = lazy(() => import('./screens/ReviewScreen'));
+const SelectPaymentScreen = lazy(() => import('./screens/SelectPaymentScreen'));
+
+
 
 const theme = createTheme({
   typography: {
@@ -51,17 +54,19 @@ function App() {
         <CssBaseline />
         <Container maxWidth={ state.wideScreen ? "lg" : "sm" }>
           <Paper>
-            <Switch>
-              <Route path='/' component={Home} exact={true} />
-              <Route path='/choose-order-type' component={ChooseOrderType} exact={true}/>
-              <Route path='/order' component={OrderScreen} exact={true}/>
-              <Route path='/review' component={ReviewScreen} exact={true}/>
-              <Route path='/select-payment' component={SelectPaymentScreen} exact={true}/>
-              <Route path='/payment' component={PaymentScreen} exact={true}/>
-              <Route path='/complete' component={CompletedOrderScreen} exact={true}/>
-              <Route path='/admin' component={AdminScreen} exact={true}/>
-              <Route path='/queue' component={QueueScreen} exact={true}/>
-            </Switch>
+            <Suspense fallback={<CircularProgress />}>
+              <Switch>
+                <Route path='/' component={Home} exact={true} />
+                <Route path='/choose-order-type' component={ChooseOrderType} exact={true}/>
+                <Route path='/order' component={OrderScreen} exact={true}/>
+                <Route path='/review' component={ReviewScreen} exact={true}/>
+                <Route path='/select-payment' component={SelectPaymentScreen} exact={true}/>
+                <Route path='/payment' component={PaymentScreen} exact={true}/>
+                <Route path='/complete' component={CompletedOrderScreen} exact={true}/>
+                <Route path='/admin' component={AdminScreen} exact={true}/>
+                <Route path='/queue' component={QueueScreen} exact={true}/>
+              </Switch>
+            </Suspense>
           </Paper>
         </Container>
       </ThemeProvider>

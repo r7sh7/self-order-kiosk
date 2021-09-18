@@ -6,7 +6,7 @@ import OrderDetailsFooter from "../components/OrderDetailsFooter";
 import { Store } from "../store";
 import { useStyles } from "../styles";
 
-export const ReviewScreen = (props) => {
+const ReviewScreen = (props) => {
     
     const styles = useStyles();
     const {state, dispatch} =  useContext(Store);
@@ -97,3 +97,5 @@ export const ReviewScreen = (props) => {
         </Box>
     );
 }
+
+export default ReviewScreen;

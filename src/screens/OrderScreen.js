@@ -9,7 +9,7 @@ import OrderDetailsFooter from "../components/OrderDetailsFooter";
 import { Store } from "../store";
 import { useStyles } from "../styles";
 
-export const OrderScreen = (props) => {
+const OrderScreen = (props) => {
     
     
     const styles = useStyles();
@@ -152,3 +152,5 @@ export const OrderScreen = (props) => {
         </Box>
     );
 }
+
+export default OrderScreen;
