@@ -31,6 +31,11 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/build/index.html'));
 });
 
+
+//middleware for parsing req body 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 //using productRoutes
 app.use('/api/products', productRoutes);
 
