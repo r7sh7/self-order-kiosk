@@ -1,5 +1,6 @@
 const express = require("express");
-const path = require("path");
+// const path = require("path");
+const cors = require("cors");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const data = require("./data");
@@ -8,6 +9,8 @@ const productRoutes = require("./src/routes/productRoutes");
 
 const app = express();
 const port = process.env.PORT || 5000;
+
+app.use(cors());
 
 //api to get category data for listing the different categories to choose from
 app.get("/api/categories", (req, res) => {
